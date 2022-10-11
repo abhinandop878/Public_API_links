@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-public-api',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicApiComponent implements OnInit {
 
-  constructor() { }
-publicData={}
+  constructor(private myapi:ApiService) { 
+    this.fetchData()
+  }
+  fetchData=()=>{
+    this.myapi.viewPublicData().subscribe((data)=>{
+      this.publicData=data
+    })
+  }
+publicData:any={}
   ngOnInit(): void {
   }
 
